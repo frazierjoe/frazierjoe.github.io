@@ -46,6 +46,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 
 ## Pushing to gh-pages
-git add dist && git commit -m "Initial dist subtree commit"
+git add build && git commit -m "Message"
 
-git subtree push --prefix dist origin gh-pages
+git subtree push --prefix build origin gh-pages

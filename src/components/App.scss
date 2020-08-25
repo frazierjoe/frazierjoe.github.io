@@ -13,4 +13,29 @@ html *{
 
 }
 
+.transform-half-l{
+    transition: transform 0.25s;
+}
+.transform-half-u{
+    transition: transform 0.25s;
+}
+.transform-half-d{
+    transition: transform 0.25s;
+}
+.transform-half-r{
+    transition: transform 0.25s;
+}
+.transform-half-l:hover{
+    transform: rotate(10deg); 
+}
+.transform-half-r:hover{
+    transform: rotate(-10deg); 
+}
+.transform-half-u:hover{
+    transform: translate(0, -0.1rem);
+}
+.transform-half-d:hover{
+    transform: translateY(-0.1rem);
+}
+
 @import "~bootstrap/scss/bootstrap";
