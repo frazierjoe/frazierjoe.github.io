@@ -1,25 +1,135 @@
-@import '../../Colors.scss';
-
-.non-sticky{
-    display: flex;
-    justify-content: center;
-    
-    z-index: 100;
-    
-    background: $dark;
-}
+@import "../../Colors.scss";
 
 $stickyBG: transparentize($dark, 0.5);
 
-.sticky{
-    transition: all ease-in 0.25s;
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: $stickyBG;
-    z-index: 100;
+.non-sticky {
+  display: flex;
+  justify-content: center;
+  z-index: 100;
+  background: $dark;
 }
 
+.sticky {
+  transition: all ease-in 0.25s;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: $stickyBG;
+  z-index: 100;
+}
 
+$lastString: "Joe Frazier";
+
+$strings: (
+  "Hello, welcome to my site!" "Take a look around."
+    "Contact me with questions." $lastString
+);
+
+$durCharFwd: 0.1; // character typed
+$durFullGap: 2; // time between typed/delete
+$durCharBwd: 0.08; // character deleted
+$durDoneGap: 1; // time between strings
+
+$charCount: 0;
+$durTotal: 0;
+@each $string in $strings {
+  $charCount: $charCount + str-length($string);
+  $durTotal: $durTotal +
+    (str-length($string) * ($durCharFwd + $durCharBwd)) +
+    $durFullGap +
+    $durDoneGap;
+}
+@function percent($string, $letter, $modifier) {
+  $stringsPast: $string - 1;
+  $time: 0;
+  @while $stringsPast > 0 {
+    $time: $time +
+      (
+        ($durCharFwd + $durCharBwd) * (str-length(nth($strings, $stringsPast)))
+      ) +
+      $durFullGap +
+      $durDoneGap;
+    $stringsPast: $stringsPast - 1;
+  }
+  @if $letter <= str-length(nth($strings, $string)) {
+    $time: $time + ($durCharFwd * ($letter - 1));
+  } @else {
+    $time: $time +
+      ($durCharFwd * str-length(nth($strings, $string))) +
+      $durFullGap +
+      ($durCharBwd * ($letter - str-length(nth($strings, $string))));
+  }
+  @return ($time / $durTotal * 100 + $modifier) + "%";
+}
+$currentPercentage: 0;
+
+@keyframes typed {
+  @for $i from 1 through length($strings) {
+    // @for $j from 1 through (str-length(nth($strings, $i)) * 2 - 1) {
+    @for $j from 1 through (str-length(nth($strings, $i)) * 2) {
+      /* string #{$i}, char #{$j} */
+      @if $j < str-length(nth($strings, $i)) * 2 {
+        // not last character deleted
+        #{percent($i, $j, 0)},
+        #{percent($i, $j+1, -0.001)} {
+          @if $j <= str-length(nth($strings, $i)) {
+            content: quote(#{str_slice(nth($strings, $i), 1, $j)});
+          } @else {
+            @if $i <= length($strings) - 1 {
+              content: quote(
+                #{str_slice(
+                    nth($strings, $i),
+                    1,
+                    str-length(nth($strings, $i)) -
+                      ($j - str-length(nth($strings, $i)))
+                  )}
+              );
+            }
+          }
+        }
+      } @else {
+        @if $i < length($strings) {
+          // not last string
+          #{percent($i, $j, 0)},
+          #{percent($i+1, 1, -0.001)} {
+            content: "​"; // zero-width space to retain element height
+          }
+        } @else {
+          // last string
+          #{percent($i, $j, 0)},
+          100% {
+            content: $lastString; // zero-width space to retain element height
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes beam-blink {
+  75% {
+    border-color: transparent;
+  }
+}
+
+.headerTitle {
+  color: $info;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color 1s ease-in;
+  @media (min-width: 575px) {
+    top: -33px;
+
+    &::after {
+      content: "";
+      display: inline-block;
+      animation: typed #{$durTotal + "s"} linear 1s 1, beam-blink 1s infinite;
+    }
+  }
+  @media (max-width: 574px){
+	  &::after{
+		  content:$lastString;
+	  }
+  }
+}

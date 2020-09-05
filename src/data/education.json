@@ -1,16 +1,42 @@
 [
-    {
-        "school": "Washington University in St. Louis",
-        "degree": "B.S. in Computer Science",
-        "gpa": "3.67",
-        "start": "August 2019",
-        "graduation": "May 2021"
-    },
-    {
-        "school": "Nebraska Weslyan University",
-        "degree": "B.S. in Physics, minor in Mathematics",
-        "gpa": "3.89",
-        "start": "August 2017",
-        "graduation": "May 2021"
-    }
+  {
+    "school": "Washington University in St. Louis",
+    "degree": "B.S. in Computer Science",
+    "gpa": "3.67",
+    "start": "August 2019",
+    "graduation": "May 2021",
+    "courses": [
+      "Object-Oriented Software Development Laboratory",
+      "Rapid Prototype Development and Creative Programming",
+      "Mobile Application Development",
+      "Programming Tools and Techniques",
+      "Web Development",
+      "Data Structures and Algorithms",
+      "Probability and Statistics for Engineers",
+      "Calculus of Several Variables (IV)",
+      "Matrix Algebra",
+      "Logic and Discrete Mathematics",
+      "Engineering Mechanics I"
+    ]
+  },
+  {
+    "school": "Nebraska Weslyan University",
+    "degree": "B.S. in Physics, minor in Mathematics",
+    "gpa": "3.89",
+    "start": "August 2017",
+    "graduation": "May 2021",
+    "courses": [
+      "Independent Study",
+      "Thermal and Statistical Physics",
+      "Electromagnetism and Optics",
+      "Advanced Lab",
+      "Introduction to Modern Physics",
+      "Electronic Measurement",
+      "Differential Equations",
+      "Calculus III",
+      "Mathematical Problem Solving",
+      "Introduction to Computer Science",
+      "Proram Design"
+    ]
+  }
 ]

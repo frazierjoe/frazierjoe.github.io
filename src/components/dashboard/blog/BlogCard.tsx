@@ -7,12 +7,12 @@ interface Props {
 
 const BlogCard = ({ blog }: Props) => {
   return (
-    <Card border="primary">
+    <Card border="primary" className="text-dark">
       <Card.Img variant="top" src={blog.image} />
       <Card.Body>
         <Card.Title>{blog.title}</Card.Title>
-        <Card.Text>
-          {blog.blurb}
+        <Card.Text className='text-dark'>
+          {blog.content}
         </Card.Text>
       </Card.Body>
       <Card.Footer>

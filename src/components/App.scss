@@ -37,5 +37,8 @@ html *{
 .transform-half-d:hover{
     transform: translateY(-0.1rem);
 }
+.cursor-pointer{
+    cursor: pointer;
+}
 
 @import "~bootstrap/scss/bootstrap";
