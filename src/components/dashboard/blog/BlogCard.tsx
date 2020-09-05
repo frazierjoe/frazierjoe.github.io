@@ -16,7 +16,7 @@ const BlogCard = ({ blog }: Props) => {
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <small className="text-muted">Last updated 3 mins ago</small>
+        <small className="text-muted">Last updated {(Date.now() - blog.lastUpdate)/60 } mins ago</small>
       </Card.Footer>
     </Card>
   );
