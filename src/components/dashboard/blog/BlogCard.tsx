@@ -16,7 +16,7 @@ const BlogCard = ({ blog }: Props) => {
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <small className="text-muted">Last updated Sept. 4 2020</small>
+  <small className="text-muted">Last updated {blog.published}</small>
       </Card.Footer>
     </Card>
   );
